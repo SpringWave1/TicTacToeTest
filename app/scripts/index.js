@@ -51,6 +51,7 @@ const App = {
 
   useAccountOne: function(){
     account = accounts[1];
+    console.log('Use account 2 for game')
   },
 
   createNewGame: function(){
@@ -62,7 +63,7 @@ const App = {
       $(".in-game").show();
       $(".waiting-for-join").hide();
       $(".game-start").hide();
-      $("#game-address").text(instance.address);
+      $("#game-address").text(TicTacToeInstance.address);
       $("#waiting").show();
       // 监听事件 侦查其他加入的用户所触发的事件
       var playerJoinedEvent = TicTacToeInstance.PlayerJoined();
@@ -75,7 +76,7 @@ const App = {
           $("#opponent-address").text(eventObj.args.player);
           // set click handler
           for(var i=0;i<3;i++){
-            for(var j=0;i<3;j++){
+            for(var j=0;j<3;j++){
               $($("#board")[0].children[0].children[i].children[j]).off('click').click({x:i,y:j}, App.setStone);
             }
           }
@@ -95,17 +96,18 @@ const App = {
     console.log('Join game called');
     var gameAddress = prompt("Address of the game");
     if(gameAddress != null){
+      // TicTacToeInstance = await TicTacToe.at(gameAddress)
+      // console.log("at", instance == null, instance)
       TicTacToe.at(gameAddress).then(instance =>{
         TicTacToeInstance = instance;
         console.log(instance)
         App.listenToEvents();
-
         return TicTacToeInstance.joinGame({from: account, value:web3.toWei('0.1',"ether"), gas:3000000});
       }).then(txResult =>{
 
         $(".in-game").show();
         $(".game-start").hide();
-        $("#game-address").text(instance.address);
+        $("#game-address").text(TicTacToeInstance.address);
         $("#waiting").hide();
 
         TicTacToeInstance.player1.call().then(playerAddress =>{
@@ -113,12 +115,14 @@ const App = {
         })
         // set click handler
         for(var i=0;i<3;i++){
-          for(var j=0;i<3;j++){
+          for(var j=0;j<3;j++){
             $($("#board")[0].children[0].children[i].children[j]).off('click').click({x:i,y:j}, App.setStone);
           }
         }
         console.log(txResult)
 
+      }).catch(err =>{
+        console.log(err)
       })
     }
   },
@@ -155,13 +159,13 @@ const App = {
   setStone: function(event){
     console.log(event)
     TicTacToeInstance.setStone(event.data.x, event.data.y,{from: account}).then(txResult =>{
-      console.log(txResult);
+      // console.log(txResult);
       App.printBoard()
     })
   },
-  printStone: function () {
+  printBoard: function () {
     TicTacToeInstance.returnBoard.call().then(board =>{
-      for(var i=0; i< board.length; i++){
+      for(var i= 0; i< board.length; i++){
         for(j = 0; j< board.length; j++){
           if(board[i][j] == account){
             $("#board").children[0].children[i].children[j].innerHTML = "X";
@@ -204,11 +208,11 @@ window.addEventListener('load', function () {
 
     var options = {
       timeout: 20000, // milliseconds,
-      headers: [{name: 'Access-Control-Allow-Origin', value: 'http://127.0.0.1:9545'}]
+      headers: [{name: 'Access-Control-Allow-Origin', value: ''}]
     }; 
 
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-    window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545'));
+    window.web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:9545"));
   }
 
   App.start()
