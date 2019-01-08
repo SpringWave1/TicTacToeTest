@@ -1,0 +1,17 @@
+
+
+#board{
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+#board td{
+  border: 1px solid;
+  width: 33.3%;
+  height: 33.3%;
+}
+
+.ingame{
+  display: none;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TicTacToe on the block chain</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script src="./app.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-lg text-center">
+
+  <h1>TicTacToe</h1>
+  <h2>Distributed TicTacToe on the blockchain</h2>
+  <div id="waiting waiting-for-join" class="in-game"> waiting for Opponent!</div>
+  <div id="your-turn waiting-for-join" class="in-game">Your turn</div>
+  <table id="board" class="in-game waiting-for-join">
+    <tbody>
+      <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      </tr>
+      <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      </tr>
+      <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      </tr>
+    </tbody>
+  </table> 
+  <div class="game-start">
+  <br><br><button id="send" onClick="App.createNewGame()" class="btn btn-primary">Create Game</button> - or - <button id="join" onClick="App.joinGame()" class="btn btn-default" >Join Game</button>
+  <br /> One game cost<br/>  
+  </div>
+  <div class="in-game">
+  Game-address<span id="game-address"></span><br/>
+  <div class="waiting-for-join">opponent-Address <span id="opponent-address"></span><br/></div>
+  </div>
+
+    <hr /><button onClick="App.useAccountOne()" class="btn btn-sm">use account #2</button>
+  <br />
+  <span class="hint"><strong>Hint:</strong> open the browser developer console to view any errors and warnings.</span>
+</div>
+</div>
+</div>
+</body>
+</html>
