@@ -1,4 +1,4 @@
-var TIcTacToe = artifacts.require('./TIcTacToe.sol')
+var TicTacToe = artifacts.require('./TIcTacToe.sol')
 // var MetaCoin = artifacts.require('./MetaCoin.sol')
 
 module.exports = function (deployer) {

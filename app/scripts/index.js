@@ -55,7 +55,7 @@ const App = {
 
   createNewGame: function(){
     console.log('create game called');
-    TicTacToe.new({from: account, value:web3.utils.toWei('0.1',"ether"), gas:3000000}).then(instance =>{
+    TicTacToe.new({from: account, value:web3.toWei('0.1',"ether"), gas:3000000}).then(instance =>{
       TicTacToeInstance = instance;
       
       // 改变样式
@@ -100,7 +100,7 @@ const App = {
         console.log(instance)
         App.listenToEvents();
 
-        return TicTacToeInstance.joinGame({from: account, value:web3.utils.toWei('0.1',"ether"), gas:3000000});
+        return TicTacToeInstance.joinGame({from: account, value:web3.toWei('0.1',"ether"), gas:3000000});
       }).then(txResult =>{
 
         $(".in-game").show();
@@ -204,11 +204,11 @@ window.addEventListener('load', function () {
 
     var options = {
       timeout: 20000, // milliseconds,
-      headers: [{name: 'Access-Control-Allow-Origin', value: '*'},{name:"Access-Control-Allow-Headers",value: "Origin, X-Requested-With, Content-Type, Accept"}]
-    };
+      headers: [{name: 'Access-Control-Allow-Origin', value: 'http://127.0.0.1:9545'}]
+    }; 
 
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-    window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545',options));
+    window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545'));
   }
 
   App.start()

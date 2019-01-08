@@ -1,5 +1,3 @@
-import { AssertionError } from "assert";
-
 var TicTacToe = artifacts.require("TicTacToe");
 
 
