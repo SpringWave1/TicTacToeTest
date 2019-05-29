@@ -8,8 +8,6 @@ contract TictacToe {
 
     
     bool gameActive;
-    
-    
     uint8 timeToReact = 3 minutes;
     uint gameValidUtil;
     
